@@ -56,9 +56,7 @@ class _HomePageState extends State<HomePage> {
         child: Stack(alignment: Alignment.center, children: <Widget>[
           CardsStacked(currentPage, colors),
           Positioned.fill(
-            child: PageView(children: <Widget>[
-              ...this.dummyContainers
-            ], controller: controller,),
+            child: PageView(children: this.dummyContainers, controller: controller,),
           )
         ],),
       )
@@ -86,6 +84,7 @@ class CardsStacked extends StatelessWidget {
           var delta = i - currentPage;
           var isOnRight = delta >= 0;
 
+          print(delta);
           var item = Positioned.directional(
             textDirection: TextDirection.ltr,
             top: 20 * delta + 40,
@@ -93,7 +92,7 @@ class CardsStacked extends StatelessWidget {
             start: delta * (primaryCardWidth / 6)  + 40 - (isOnRight? 0 : (400 * -delta)),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+                borderRadius: BorderRadius.all(Radius.circular(20 - delta * 2.2)),
                 color: colors[i]
               ),
               height: primaryCardHeight - (primaryCardHeight * delta * 0.1),
