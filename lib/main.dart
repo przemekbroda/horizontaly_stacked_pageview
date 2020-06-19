@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -84,19 +84,35 @@ class CardsStacked extends StatelessWidget {
           var delta = i - currentPage;
           var isOnRight = delta >= 0;
 
-          print(delta);
-          var item = Positioned.directional(
-            textDirection: TextDirection.ltr,
-            top: 20 * delta + 40,
-//            start: delta * (primaryCardWidth / 7 - ((primaryCardWidth / 7) / 2) * delta)  + 40 - (isOnRight? 0 : (400 * -delta)),
-            start: delta * (primaryCardWidth / 6)  + 40 - (isOnRight? 0 : (400 * -delta)),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20 - delta * 2.2)),
-                color: colors[i]
+//          print(delta);
+//          var item = Positioned.directional(
+//            textDirection: TextDirection.ltr,
+//            top: 20 * delta + 40,
+////            start: delta * (primaryCardWidth / 7 - ((primaryCardWidth / 7) / 2) * delta)  + 40 - (isOnRight? 0 : (400 * -delta)),
+//            start: delta * (primaryCardWidth / 6)  + 40 - (isOnRight? 0 : (400 * -delta)),
+//            child: Container(
+//              decoration: BoxDecoration(
+//                borderRadius: BorderRadius.all(Radius.circular(20 - delta * 2.2)),
+//                color: colors[i]
+//              ),
+//              height: primaryCardHeight - (primaryCardHeight * delta * 0.1),
+//              width: primaryCardWidth - (primaryCardWidth * delta * 0.1),
+//            ),
+//          );
+
+          var item = Positioned(
+            top: 5 * delta + 40,
+            left: delta * (primaryCardWidth / 7)  + 40 - (isOnRight? 0 : (400 * -delta)),
+            child: Transform.scale(
+              scale: math.min(1.0, -0.13 * delta + 1.05),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20 - delta * 2.2)),
+                    color: colors[i]
+                ),
+                height: primaryCardHeight,
+                width: primaryCardWidth,
               ),
-              height: primaryCardHeight - (primaryCardHeight * delta * 0.1),
-              width: primaryCardWidth - (primaryCardWidth * delta * 0.1),
             ),
           );
 
